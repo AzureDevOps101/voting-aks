@@ -144,11 +144,7 @@ under the License.
    | server for that repository.
    |-->
   <mirrors>
-    <mirror>
-      <id>huaweicloud</id>
-      <mirrorOf>*</mirrorOf>
-      <url>https://mirrors.huaweicloud.com/repository/maven/</url>
-    </mirror>
+   
 
     <!-- mirror
      | Specifies a repository mirror site to use instead of a given repository. The repository that

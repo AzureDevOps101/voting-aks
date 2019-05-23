@@ -34,7 +34,7 @@ spec:
         service: vote
     spec:
       containers:
-      - image: docker-server/docker-org/vote:image-version
+      - image: #{docker-server}#/#{docker-image}#
         name: vote
         ports:
         - containerPort: 5000

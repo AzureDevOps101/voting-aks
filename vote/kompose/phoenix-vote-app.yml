@@ -34,7 +34,7 @@ spec:
         service: vote
     spec:
       containers:
-      - image: #{docker-server}#/#{docker-image}#
+      - image: #{docker-server}#/#{docker-repo}#:#{Build.BuildId}#
         name: vote
         ports:
         - containerPort: 5000

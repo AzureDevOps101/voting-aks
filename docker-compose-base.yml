@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  vote:
+    image: voting/vote
+    build:
+      context: ./vote
+      dockerfile: Dockerfile
+  result:
+    image: voting/result
+    build:
+      context: ./result
+      dockerfile: Dockerfile
+  worker:
+    image: voting/worker
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+  redis:
+    image: azuredevops101.azurecr.cn/redis:alpine
+  db:
+    image: azuredevops101.azurecr.cn/postgres:9.4

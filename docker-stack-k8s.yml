@@ -1,0 +1,24 @@
+version: "3"
+services:
+    redis:
+        image: azuredevops101.azurecr.cn/redis:alpine
+        ports:
+            - "6379"
+    db:
+        image: azuredevops101.azurecr.cn/postgres:9.4
+        volumes:
+            - db-data:/var/lib/postgresql/data
+    vote:
+        image: azuredevops101.azurecr.cn/linux/vote:latest
+        ports:
+            - 5000:80
+        depends_on:
+            - redis
+    result:
+        image: azuredevops101.azurecr.cn/linux/result:latest
+        ports:
+            - 5001:80
+        depends_on:
+            - db
+    worker:
+        image: azuredevops101.azurecr.cn/linux/worker:latest

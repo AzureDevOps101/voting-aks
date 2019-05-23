@@ -7,7 +7,7 @@ kind: Service
 metadata:
   labels:
     service: worker
-    app.kubernetes.io/name: phoenix-store-test
+    app.kubernetes.io/name: vote-test
   name: worker
 spec:
   ports:
@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: phoenix-store-test
+        app.kubernetes.io/name: vote-test
         app.kubernetes.io/component: worker
         app: worker
         service: worker

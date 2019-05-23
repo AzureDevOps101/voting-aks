@@ -1,0 +1,42 @@
+##################################################################################################
+# Worker service
+##################################################################################################
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: worker
+    app.kubernetes.io/name: phoenix-store-test
+  name: worker
+spec:
+  ports:
+  - name: worker
+    port: 55555
+    targetPort: 0
+  selector:
+    service: worker
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: worker
+  name: worker
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: phoenix-store-test
+        app.kubernetes.io/component: worker
+        app: worker
+        service: worker
+    spec:
+      containers:
+      - image: #{docker-server}#/#{docker-repo}#:#{Build.BuildId}#
+        name: worker
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Always
+---

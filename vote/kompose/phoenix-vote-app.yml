@@ -1,0 +1,44 @@
+##################################################################################################
+# Vote service
+##################################################################################################
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: vote
+    app.kubernetes.io/name: phoenix-store-test
+  name: vote
+spec:
+  ports:
+  - port: 5000
+    targetPort: 80
+    name: vote
+  selector:
+    service: vote
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: vote
+  name: vote
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: phoenix-store-test
+        app.kubernetes.io/component: vote
+        app: vote
+        service: vote
+    spec:
+      containers:
+      - image: docker-server/docker-org/vote:image-version
+        name: vote
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Always
+---

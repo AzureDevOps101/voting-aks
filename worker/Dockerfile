@@ -1,4 +1,4 @@
-FROM azuredevops101.azurecr.cn/dotnet:1.0.0-preview2-sdk
+FROM dotnet:1.0.0-preview2-sdk
 
 WORKDIR /code
 

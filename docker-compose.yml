@@ -29,14 +29,14 @@ services:
       - back-tier
 
   redis:
-    image: azuredevops101.azurecr.cn/redis:alpine
+    image: redis:alpine
     container_name: redis
     ports: ["6379"]
     networks:
       - front-tier
 
   db:
-    image: azuredevops101.azurecr.cn/postgres:9.4
+    image: postgres:9.4
     container_name: db
     volumes:
       - "db-data:/var/lib/postgresql/data"

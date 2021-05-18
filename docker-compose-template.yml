@@ -2,7 +2,7 @@ version: "3"
 
 services:
   vote:
-    image: {acraddress}/vote:latest
+    image: uxxpapez1046.azurecr.cn/vote:latest
     ports:
       - "5000:80"
     networks:
@@ -10,7 +10,7 @@ services:
       - back-tier
 
   result:
-    image: {acraddress}/result:latest
+    image: uxxpapez1046.azurecr.cn/result:latest
     ports:
       - "5001:80"
       - "5858:5858"
@@ -19,19 +19,19 @@ services:
       - back-tier
 
   worker:
-    image: {acraddress}/worker:latest
+    image: uxxpapez1046.azurecr.cn/worker:latest
     networks:
       - back-tier
 
   redis:
-    image: {acraddress}/redis:alpine
+    image: uxxpapez1046.azurecr.cn/redis:alpine
     container_name: redis
     ports: ["6379"]
     networks:
       - back-tier
 
   db:
-    image: {acraddress}/postgres:9.4
+    image: uxxpapez1046.azurecr.cn/postgres:9.4
     container_name: db
     volumes:
       - "db-data:/var/lib/postgresql/data"

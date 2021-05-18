@@ -32,6 +32,8 @@ services:
   db:
     image: uxxpapez1046.azurecr.cn/postgres:9.4
     container_name: db
+    environment: 
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - "db-data:/var/lib/postgresql/data"
     networks:

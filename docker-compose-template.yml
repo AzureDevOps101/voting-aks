@@ -27,7 +27,7 @@ services:
     container_name: redis
     ports: ["6379"]
     networks:
-      - back-tier
+      - front-tier
 
   db:
     image: uxxpapez1046.azurecr.cn/postgres:9.4

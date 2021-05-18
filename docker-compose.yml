@@ -13,7 +13,7 @@ services:
 
   result:
     build: ./result
-    command: nodemon --debug server.js
+    command: node --inspect server.js
     volumes:
       - ./result:/app
     ports:
@@ -36,7 +36,9 @@ services:
       - front-tier
 
   db:
-    image: postgres:9.4
+    image: postgres:9.6-alpine
+    environment: 
+      - POSTGRES_HOST_AUTH_METHOD=trust
     container_name: db
     volumes:
       - "db-data:/var/lib/postgresql/data"

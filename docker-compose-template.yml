@@ -2,7 +2,7 @@ version: "3"
 
 services:
   vote:
-    image: uxxpapez1046.azurecr.cn/voting/vote:latest
+    image: uxxpapez1046.azurecr.cn/vote:latest
     ports:
       - "5000:80"
     networks:
@@ -10,7 +10,7 @@ services:
       - back-tier
 
   result:
-    image: uxxpapez1046.azurecr.cn/voting/result:latest
+    image: uxxpapez1046.azurecr.cn/result:latest
     ports:
       - "5001:80"
       - "5858:5858"
@@ -19,7 +19,7 @@ services:
       - back-tier
 
   worker:
-    image: uxxpapez1046.azurecr.cn/voting/worker:latest
+    image: uxxpapez1046.azurecr.cn/worker:latest
     networks:
       - back-tier
 

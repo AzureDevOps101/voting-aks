@@ -1,78 +1,46 @@
 version: "3"
+
 services:
+  vote:
+    image: {acraddress}/vote:latest
+    ports:
+      - "5000:80"
+    networks:
+      - front-tier
+      - back-tier
 
-    redis:
-        image: azuredevops101.azurecr.cn/redis:alpine
-        ports:
-            - "6379"
-        networks:
-            - frontend
-        deploy:
-            replicas: 2
-            update_config:
-                parallelism: 2
-                delay: 10s
-            restart_policy:
-                condition: on-failure
-    db:
-        image: azuredevops101.azurecr.cn/postgres:9.4
-        volumes:
-            - db-data:/var/lib/postgresql/data
-        networks:
-            - backend
-        deploy:
-            placement:
-                constraints: [node.role == manager]
-    vote:
-        image: voting/vote:%{Build.BuildId}%
-        ports:
-            - 5000:80
-        networks:
-            - frontend
-        depends_on:
-            - redis
-        deploy:
-            replicas: 2
-            update_config:
-                parallelism: 2
-            restart_policy:
-                condition: on-failure
-    result:
-        image: azuredevops101.azurecr.cn/voting/result:latest
-        ports:
-            - 5001:80
-        networks:
-            - backend
-        depends_on:
-            - db
-        deploy:
-            replicas: 1
-            update_config:
-                parallelism: 2
-                delay: 10s
-            restart_policy:
-                condition: on-failure
+  result:
+    image: {acraddress}/result:latest
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks:
+      - front-tier
+      - back-tier
 
-    worker:
-        image: azuredevops101.azurecr.cn/voting/worker:latest
-        networks:
-            - frontend
-            - backend
-        deploy:
-            mode: replicated
-            replicas: 1
-            labels: [APP=VOTING]
-            restart_policy:
-                condition: on-failure
-                delay: 10s
-                max_attempts: 3
-                window: 120s
-            placement:
-                constraints: [node.role == manager]
+  worker:
+    image: {acraddress}/worker:latest
+    networks:
+      - back-tier
 
-networks:
-    frontend:
-    backend:
+  redis:
+    image: {acraddress}/redis:alpine
+    container_name: redis
+    ports: ["6379"]
+    networks:
+      - back-tier
+
+  db:
+    image: {acraddress}/postgres:9.4
+    container_name: db
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    networks:
+      - back-tier
 
 volumes:
-    db-data:
+  db-data:
+
+networks:
+  front-tier:
+  back-tier:

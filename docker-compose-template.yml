@@ -7,7 +7,6 @@ services:
       - "5000:80"
     networks:
       - front-tier
-      - back-tier
 
   result:
     image: uxxpapez1046.azurecr.cn/result:latest
@@ -15,13 +14,13 @@ services:
       - "5001:80"
       - "5858:5858"
     networks:
-      - front-tier
       - back-tier
 
   worker:
     image: uxxpapez1046.azurecr.cn/worker:latest
     networks:
-      - back-tier
+        - front-tier
+        - back-tier
 
   redis:
     image: uxxpapez1046.azurecr.cn/redis:alpine

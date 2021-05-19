@@ -21,7 +21,7 @@ spec:
         io.kompose.service: redis
     spec:
       containers:
-      - image: uxxpapez1046.azurecr.cn/redis:alpine
+      - image: {acr-address}/redis:alpine
         name: redis
         ports:
         - containerPort: 6379

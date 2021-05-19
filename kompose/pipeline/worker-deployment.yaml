@@ -10,6 +10,9 @@ metadata:
   name: worker
 spec:
   replicas: 1
+  selector: 
+    matchLabels:
+      io.kompose.service: worker
   strategy: {}
   template:
     metadata:

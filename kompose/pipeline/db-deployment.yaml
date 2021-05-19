@@ -10,6 +10,9 @@ metadata:
   name: db
 spec:
   replicas: 1
+  selector: 
+    matchLabels:
+      io.kompose.service: db
   strategy:
     type: Recreate
   template:
@@ -19,12 +22,12 @@ spec:
         io.kompose.service: db
     spec:
       containers:
-      - image: uxxpapez1046.azurecr.cn/postgres:9.4
-        name: db
+      - name: db
+        image: uxxpapez1046.azurecr.cn/postgres:9.4
         env:
-          - name: POSTGRES_HOST_AUTH_METHOD
-            value: "trust"
-        imagePullSecrets:
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: "trust"
+      imagePullSecrets:
       - name: regcred
       restartPolicy: Always
 status: {}

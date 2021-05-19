@@ -6,21 +6,20 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: db
-  name: db
+    io.kompose.service: worker
+  name: worker
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: db
+        io.kompose.service: worker
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/postgres:9.4
-        name: db
+      - image: {acr-address}/worker:latest
+        name: worker
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always

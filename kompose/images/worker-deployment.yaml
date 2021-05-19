@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: result
-  name: result
+    io.kompose.service: worker
+  name: worker
 spec:
   replicas: 1
   strategy: {}
@@ -15,13 +15,11 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: result
+        io.kompose.service: worker
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/voting/result:latest
-        name: result
-        ports:
-        - containerPort: 80
+      - image: azuredevops101.azurecr.io/voting/worker:latest
+        name: worker
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always

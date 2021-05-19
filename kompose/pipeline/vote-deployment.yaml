@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: redis
-  name: redis
+    io.kompose.service: vote
+  name: vote
 spec:
   replicas: 1
   strategy: {}
@@ -15,14 +15,13 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: redis
+        io.kompose.service: vote
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/redis:alpine
-        name: redis
+      - image: {acr-address}/vote:latest
+        name: vote
         ports:
-        - containerPort: 6379
-        resources: {}
+        - containerPort: 80
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always

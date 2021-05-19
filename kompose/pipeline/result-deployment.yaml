@@ -21,7 +21,7 @@ spec:
         io.kompose.service: result
     spec:
       containers:
-      - image: uxxpapez1046.azurecr.cn/result:latest
+      - image: {acr-address}/result:latest
         name: result
         ports:
         - containerPort: 80

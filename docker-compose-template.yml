@@ -2,14 +2,14 @@ version: "3"
 
 services:
   vote:
-    image: uxxpapez1046.azurecr.cn/vote:latest
+    image: {acr-address}/vote:latest
     ports:
       - "5000:80"
     networks:
       - front-tier
 
   result:
-    image: uxxpapez1046.azurecr.cn/result:latest
+    image: {acr-address}/result:latest
     ports:
       - "5001:80"
       - "5858:5858"
@@ -17,20 +17,20 @@ services:
       - back-tier
 
   worker:
-    image: uxxpapez1046.azurecr.cn/worker:latest
+    image: {acr-address}/worker:latest
     networks:
         - front-tier
         - back-tier
 
   redis:
-    image: uxxpapez1046.azurecr.cn/redis:alpine
+    image: {acr-address}/redis:alpine
     container_name: redis
     ports: ["6379"]
     networks:
       - front-tier
 
   db:
-    image: uxxpapez1046.azurecr.cn/postgres:9.4
+    image: {acr-address}/postgres:9.4
     container_name: db
     environment: 
       - POSTGRES_HOST_AUTH_METHOD=trust

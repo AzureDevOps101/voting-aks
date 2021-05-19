@@ -18,7 +18,7 @@ spec:
         io.kompose.service: vote
     spec:
       containers:
-      - image: {acr-address}/vote:latest
+      - image: uxxpapez1046.azurecr.cn/vote:latest
         name: vote
         ports:
         - containerPort: 80

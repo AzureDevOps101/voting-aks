@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -6,21 +6,25 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: db
-  name: db
+    io.kompose.service: result
+  name: result
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  selector: 
+    matchLabels:
+      io.kompose.service: result
+  strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: db
+        io.kompose.service: result
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/postgres:9.4
-        name: db
+      - image: {acr-address}/result:latest
+        name: result
+        ports:
+        - containerPort: 80
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always

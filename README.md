@@ -36,14 +36,19 @@ docker stack deploy --compose-file docker-stack.yml vote
 
 ## Deploy to Kubernetes
 
-Note: if you are attending leansoftX.com hosted training sessions, <acr-passowrd> will be provided by the trainer. Otherwise you will need to replace all azuredevops101.azurecr.cn reference to your own ACR instance.
+Note: if you are attending leansoftX.com hosted training sessions, {acr-password} will be provided by the trainer. Otherwise you will need to replace all {acr-address} to your own ACR instance.
 
 ```shell
+
 # create a secret according to your Azure Container Registry settings
-kubectl create secret docker-registry regcred --docker-server=azuredevops101.azurecr.cn --docker-username=azuredevops101 --docker-password=XRAH2SQ9l+Cn8Yj8cmNSo=vnEN7jEe8B --docker-email=info@leansoftX.com
+kubectl create secret docker-registry regcred \
+--docker-server={acr-address} \
+--docker-username={acr-name} \
+--docker-password={acr-password} \
+--docker-email={your email}
 
 # run kubectl to deploy
-cd kompose
+cd kompose/pipeline
 kubectl apply -f ./
 ```
 

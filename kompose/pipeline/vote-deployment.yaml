@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -6,20 +6,25 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: worker
-  name: worker
+    io.kompose.service: vote
+  name: vote
 spec:
   replicas: 1
+  selector: 
+    matchLabels:
+      io.kompose.service: vote
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: worker
+        io.kompose.service: vote
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/voting/worker:latest
-        name: worker
+      - image: {acr-address}/vote:latest
+        name: vote
+        ports:
+        - containerPort: 80
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always

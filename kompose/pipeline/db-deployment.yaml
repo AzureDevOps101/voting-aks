@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -6,22 +6,27 @@ metadata:
     kompose.version: 1.11.0 (39ad614)
   creationTimestamp: null
   labels:
-    io.kompose.service: vote
-  name: vote
+    io.kompose.service: db
+  name: db
 spec:
   replicas: 1
-  strategy: {}
+  selector: 
+    matchLabels:
+      io.kompose.service: db
+  strategy:
+    type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: vote
+        io.kompose.service: db
     spec:
       containers:
-      - image: azuredevops101.azurecr.cn/voting/vote:latest
-        name: vote
-        ports:
-        - containerPort: 80
+      - name: db
+        image: {acr-address}/postgres:9.4
+        env:
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: "trust"
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always
